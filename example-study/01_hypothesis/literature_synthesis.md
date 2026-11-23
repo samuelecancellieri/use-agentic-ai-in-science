@@ -1,0 +1,12 @@
+# Literature Synthesis Matrix
+
+This synthesis was assembled using grounded retrieval (`tools/lit_search.py`) and verified against CrossRef (`tools/verify_citations.py`). Every DOI below corresponds to a real peer-reviewed publication.
+
+| Study | Model / Scope | Key Finding | Identified Gap / Relevance to Study |
+|---|---|---|---|
+| **Sos et al. (2009)**, *PNAS*, [10.1073/pnas.0907325106](https://doi.org/10.1073/pnas.0907325106) | Cancer cell line panel (MAPK/PI3K co-targeting) | Dual inhibition of MAPK and PI3K/mTOR signaling overcomes single-agent resistance across multiple oncogene-driven tumors. | Motivates quantifying both transcriptomic and Bliss viability synergy in a single paired study design. |
+| **Villanueva et al. (2010)**, *Cancer Cell*, [10.1016/j.ccr.2010.11.023](https://doi.org/10.1016/j.ccr.2010.11.023) | BRAF-mutant melanoma acquired resistance models | Acquired resistance to BRAF/MAPK inhibition frequently engages IGF-1R/PI3K survival signaling; dual MEK + PI3K targeting induces apoptosis. | Directly underpins **H1** (adaptive PI3K activation) and **H2** (apoptosis induction under dual blockade). |
+| **Posch et al. (2013)**, *PNAS*, [10.1073/pnas.1216013110](https://doi.org/10.1073/pnas.1216013110) | NRAS/MAPK-driven melanoma in vitro & xenografts | Combined MEK and PI3K/mTOR inhibition yields synergistic growth suppression where monotherapies plateau. | Supports evaluating Bliss excess synergy across a 7-point concentration gradient. |
+| **Shi et al. (2014)**, *Cancer Discovery*, [10.1158/2159-8290.CD-13-0642](https://doi.org/10.1158/2159-8290.CD-13-0642) | Clinical melanoma biopsies & cell lines | MAPK reactivation and PI3K-PTEN-AKT upregulation represent two dominant, co-occurring resistance axes in patients. | Highlights the clinical relevance of measuring both MAPK and PI3K pathway modules simultaneously. |
+| **Benjamini & Hochberg (1995)**, *JRSS-B*, [10.1111/j.2517-6161.1995.tb02031.x](https://doi.org/10.1111/j.2517-6161.1995.tb02031.x) | Statistical methodology | Controls the false discovery rate (FDR) across large families of simultaneous hypothesis tests. | Standard multiple-testing control for transcriptome-wide differential expression and pathway ORA. |
+| **Bliss (1939)**, *Annals of Applied Biology*, [10.1111/j.1744-7348.1939.tb06990.x](https://doi.org/10.1111/j.1744-7348.1939.tb06990.x) | Pharmacology / drug interaction theory | Defines probabilistic independence ($E_{AB} = E_A + E_B - E_A E_B$) as a baseline for quantifying drug synergy. | Provides the quantitative null model for **H2**. |

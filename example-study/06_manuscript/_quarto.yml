@@ -1,0 +1,18 @@
+project:
+  title: "Transcriptomic Reprogramming Under Dual MAPK/PI3K Inhibition"
+  type: default
+
+bibliography: references.bib
+format:
+  html:
+    toc: true
+    number-sections: true
+    theme: cosmo
+    embed-resources: true
+  docx:
+    number-sections: true
+  pdf:
+    documentclass: article
+    number-sections: true
+    geometry:
+      - margin=1in

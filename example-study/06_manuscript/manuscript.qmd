@@ -1,0 +1,85 @@
+---
+title: "Transcriptomic Reprogramming and Synergistic Growth Suppression Under Dual MAPK/PI3K Pathway Inhibition in BRAF-Mutant Melanoma Models"
+author:
+  - name: "Research Team (Agentic AI Worked Example)"
+    affiliation: "Open Science Reference Workspace"
+date: "2026-11-23"
+bibliography: references.bib
+---
+
+## Abstract
+
+**Background:** Targeted inhibition of the MAPK/ERK signaling cascade produces rapid responses in oncogene-driven melanoma, but durability is frequently undermined by adaptive receptor tyrosine kinase and PI3K/AKT/mTOR survival feedback [@villanueva2010; @shi2014].  
+**Methods:** Using a pre-registered, fully reproducible RNA-seq and pharmacological viability benchmark ($n = 4$ biological replicates per arm across `Vehicle`, `MEKi`, `PI3Ki`, and `Combo`; 1,200 profiled genes), we quantified pathway-level transcriptomic reprogramming via Welch's $t$-tests with Benjamini-Hochberg false discovery rate (BH-FDR) control [@benjamini1995], Fisher's exact over-representation analysis, 4-parameter Hill $IC_{50}$ modeling, and Bliss independence synergy scoring [@bliss1939].  
+**Results:** Single-agent `MEKi` suppressed `MAPK_ERK_Signaling` (11/25 genes downregulated; mean $\log_2\text{FC} = -2.01$, ORA $\text{FDR} = 1.64 \times 10^{-16}$) while triggering compensatory upregulation of `PI3K_AKT_mTOR_Signaling` (11/25 genes upregulated; mean $\log_2\text{FC} = +1.34$, ORA $\text{FDR} = 1.25 \times 10^{-19}$), supporting Hypothesis H1. Dual `Combo` blockade extinguished adaptive PI3K signaling, driving coordinated suppression of `Cell_Cycle_Proliferation` (27/30 genes; mean $\log_2\text{FC} = -2.41$, ORA $\text{FDR} = 2.17 \times 10^{-32}$) and robust induction of `Apoptosis_Stress_Response` (25/25 genes; mean $\log_2\text{FC} = +2.34$, ORA $\text{FDR} = 2.72 \times 10^{-50}$). Pharmacologically, `Combo` reduced $IC_{50}$ by 6.4-fold relative to `MEKi` alone (`0.138 µM` vs. `0.878 µM`; `PI3Ki` = `1.249 µM`) and achieved positive mid-range Bliss excess synergy (`+0.341` mean across $0.1$–$1.0\ \mu\text{M}$; peak `+0.423` at `0.3 µM`), supporting Hypothesis H2.  
+**Conclusions:** Paired transcriptomic and Bliss viability profiling quantitatively links adaptive PI3K feedback to single-agent resistance and demonstrates synergistic cytostatic and pro-apoptotic efficacy under dual MAPK/PI3K inhibition.
+
+---
+
+## Introduction
+
+Targeted therapies inhibiting the RAF–MEK–ERK (MAPK) cascade have transformed the management of BRAF-mutant melanoma, yet intrinsic and adaptive resistance remain major barriers to durable remission [@shi2014]. Mechanistic studies have demonstrated that pharmacological MAPK blockade relieves ERK-mediated negative feedback on receptor tyrosine kinases (such as IGF-1R and ERBB3), enabling compensatory activation of the PI3K–AKT–mTOR survival axis [@villanueva2010]. Preclinical studies across multiple oncogene-driven tumor lineages have further shown that concurrent inhibition of MAPK and PI3K/mTOR pathways can overcome single-agent plateaus and induce synergistic growth suppression [@sos2009; @posch2013].
+
+To illustrate a rigorous, end-to-end agentic AI scientific workflow—from pre-registered hypothesis formulation to verified statistical inference, publication-grade visualization, and reproducible manuscript authoring—we evaluated two pre-registered hypotheses:
+
+- **H1 (Adaptive Feedback):** Single-agent MEK inhibition (`MEKi`) suppresses canonical `MAPK_ERK_Signaling` transcripts while inducing statistically significant compensatory upregulation of `PI3K_AKT_mTOR_Signaling`.
+- **H2 (Dual-Blockade Synergy):** Combined MEK and PI3K inhibition (`Combo`) abolishes adaptive PI3K feedback, produces synergistic downregulation of `Cell_Cycle_Proliferation` alongside upregulation of `Apoptosis_Stress_Response`, and achieves greater-than-Bliss-additive viability suppression.
+
+---
+
+## Methods
+
+### Experimental Design & Data Provenance
+
+The benchmark dataset comprises 16 RNA-seq libraries across four experimental arms (`Vehicle`, `MEKi`, `PI3Ki`, and `Combo`; $n = 4$ biological replicates per arm, balanced across two technical batches) profiling 1,200 genes spanning five curated biological modules (`MAPK_ERK_Signaling`, `PI3K_AKT_mTOR_Signaling`, `Cell_Cycle_Proliferation`, `Apoptosis_Stress_Response`, `Oxidative_Phosphorylation`), four canonical housekeeping controls (`ACTB`, `GAPDH`, `RPLP0`, `TBP`), and 1,071 background genes. Paired 7-point dose-response viability assays ($0.01$–$10.0\ \mu\text{M}$, $n = 4$ replicates per concentration) were generated deterministically (`seed = 42`, `02_data/generate_dataset.py`) with negative-binomial count overdispersion and cryptographically hashed in `02_data/raw_manifest.json`. Raw and processed CSV tables are archived in Google Drive and linked via SHA-256 checksums.
+
+### Normalization, Quality Control & Statistical Analysis
+
+All analyses were executed deterministically via `03_analysis/run_analysis.py` (Python 3.12, NumPy, pandas, SciPy, statsmodels). Raw counts were verified for zero missingness and normalized to $\log_2(\text{CPM} + 1)$. Unsupervised sample structure was assessed via singular value decomposition (PCA) on gene-centered $\log_2(\text{CPM} + 1)$ values. Housekeeping stability was monitored as a negative control (acceptance criterion: $\max |\log_2\text{FC}| < 0.30$ across treatment vs. Vehicle contrasts).
+
+Gene-level differential expression was tested using two-sided Welch's $t$-tests with Benjamini-Hochberg FDR correction [@benjamini1995], defining differentially expressed genes (DEGs) at $\text{BH-FDR} < 0.05$ and $|\log_2\text{FC}| \ge 1.0$. Pathway over-representation analysis (ORA) used one-sided Fisher's exact tests with BH-FDR adjustment. Dose-response viability curves were fitted to a 4-parameter log-logistic Hill model ($y = b + (1 - b) / [1 + (c / IC_{50})^h]$) via nonlinear least squares, and drug synergy was quantified as Bliss excess inhibition [@bliss1939]:
+
+$$E_{\text{Bliss}} = E_{\text{MEKi}} + E_{\text{PI3Ki}} - E_{\text{MEKi}} \cdot E_{\text{PI3Ki}}, \qquad \Delta_{\text{Bliss}} = E_{\text{Combo, obs}} - E_{\text{Bliss}}.$$
+
+---
+
+## Results
+
+### Quality Control and Unsupervised Transcriptomic Structure
+
+All 16 libraries passed quality control with zero missing values. Negative-control housekeeping transcripts (`ACTB`, `GAPDH`, `RPLP0`, `TBP`) remained stable across all treatment vs. Vehicle comparisons ($\max |\log_2\text{FC}| = 0.239$, meeting the pre-specified $< 0.30$ threshold). Principal component analysis revealed tight within-arm clustering and clear separation across treatment arms, with PC1 explaining `32.2%`, PC2 `19.3%`, and PC3 `4.5%` of total transcriptomic variance (@fig-transcriptome A).
+
+### Single-Agent MEK Inhibition Triggers Adaptive PI3K/AKT Upregulation (H1)
+
+Comparing `MEKi` against `Vehicle` identified `11` significantly upregulated and `15` significantly downregulated DEGs ($|\log_2\text{FC}| \ge 1.0$, $\text{BH-FDR} < 0.05$; @fig-transcriptome B). As predicted, canonical ERK transcriptional outputs (`DUSP6`, `SPRY2`, `ETV4`) were strongly repressed, with `MAPK_ERK_Signaling` enriched among downregulated DEGs (`11/25` genes; mean $\log_2\text{FC} = -2.01$, ORA $\text{FDR} = 1.64 \times 10^{-16}$). Concurrently, `PI3K_AKT_mTOR_Signaling` was strongly enriched among upregulated DEGs (`11/25` genes, including `AKT3`, `SGK1`, and `IGF1R`; mean $\log_2\text{FC} = +1.34$, ORA $\text{FDR} = 1.25 \times 10^{-19}$), confirming adaptive feedback activation under single-agent MEK blockade (**H1 supported**).
+
+### Dual MAPK/PI3K Blockade Drives Proliferation Arrest and Apoptosis (H2)
+
+Dual treatment (`Combo` vs. `Vehicle`) substantially expanded transcriptomic remodeling to `26` upregulated and `69` downregulated DEGs (@fig-transcriptome C), including `40` genes significantly further downregulated compared to `MEKi` monotherapy (`Combo` vs. `MEKi`). Pathway-level aggregation (@fig-transcriptome D) confirmed that `Combo` abolished adaptive PI3K/AKT induction while driving profound suppression of `Cell_Cycle_Proliferation` (`27/30` genes, including `MKI67`, `CDK1`, and `TOP2A`; mean $\log_2\text{FC} = -2.41$, ORA $\text{FDR} = 2.17 \times 10^{-32}$) and coordinated induction of `Apoptosis_Stress_Response` (`25/25` genes, including `BCL2L11`, `BBC3`, and `PMAIP1`; mean $\log_2\text{FC} = +2.34$, ORA $\text{FDR} = 2.72 \times 10^{-50}$).
+
+![Transcriptomic landscape of single-agent and dual MAPK/PI3K inhibition. (A) Unsupervised PCA of 16 RNA-seq libraries across four treatment arms. (B) Volcano plot of MEKi vs. Vehicle showing MAPK suppression alongside adaptive PI3K/AKT upregulation. (C) Volcano plot of Combo vs. Vehicle showing coordinated cell-cycle suppression and pro-apoptotic induction. (D) Pathway-level mean log2 fold-change summary across treatments versus Vehicle.](../04_figures/output/fig1_transcriptomic_landscape.png){#fig-transcriptome}
+
+### Pharmacological Potency Shift and Bliss Independence Synergy
+
+Consistent with the transcriptomic shift from cytostasis to apoptosis, 4-parameter Hill modeling of 7-point viability assays revealed a `6.4`-fold improvement in potency for `Combo` ($IC_{50} = 0.138\ \mu\text{M}$) compared to `MEKi` ($IC_{50} = 0.878\ \mu\text{M}$) and a `9.1`-fold improvement over `PI3Ki` ($IC_{50} = 1.249\ \mu\text{M}$; @fig-synergy A). Observed `Combo` growth inhibition substantially exceeded the Bliss independence additive expectation across the pharmacologically active window ($0.1$–$1.0\ \mu\text{M}$), yielding a mean mid-range Bliss excess of `+0.341` and a peak Bliss excess of `+0.423` at `0.3 µM` (@fig-synergy B), confirming **H2**.
+
+![Pharmacological viability and Bliss independence drug synergy. (A) Individual replicate viability points (n = 4 per concentration) overlaid with 4-parameter Hill curve fits and estimated IC50 values. (B) Observed Combo fractional growth inhibition versus Bliss independence additive expectation across 0.01–10 µM, with shaded positive Bliss synergy.](../04_figures/output/fig2_synergy_viability.png){#fig-synergy}
+
+---
+
+## Discussion
+
+This study demonstrates how paired transcriptomic profiling and quantitative drug-interaction modeling can dissect adaptive signaling resistance and validate rational combination therapy [@sos2009; @villanueva2010; @posch2013]. Specifically, single-agent MEK inhibition suppressed ERK target transcription while activating compensatory PI3K/AKT/mTOR signaling, whereas concurrent PI3K blockade eliminated this escape route, deepening cell-cycle arrest and triggering a robust pro-apoptotic signature (`BCL2L11`, `BBC3`, `PMAIP1`) mirrored by strong Bliss synergy.
+
+### Limitations and Next Steps
+
+1. **Synthetic Benchmark Model:** As explicitly documented in `02_data/generate_dataset.py`, the dataset used in this reference repository is a deterministic synthetic benchmark designed to showcase end-to-end agentic AI scientific rigor without exposing restricted patient data. Real wet-lab RNA-seq studies require count-based generalized linear models (e.g., `DESeq2` or `edgeR`) and independent validation across multiple genetically distinct cell lines and in vivo xenografts.
+2. **Single Timepoint and Molar Ratio:** Future wet-lab extensions should profile longitudinal kinetics (e.g., 6 h, 24 h, 72 h) and full $N \times M$ checkerboard dose matrices (Loewe additivity and ZIP synergy scores) to distinguish early signaling rewiring from late cytotoxic commitment.
+
+### Code and Data Availability
+
+All analysis scripts, figure generation code, Quarto manuscript sources, and SHA-256 data manifests are version-controlled in this repository (`use-agentic-ai-in-science`). Raw/processed CSV tables, NotebookLM source packets, and rendered collaborator drafts are archived in the project's linked Google Drive workspace.
+
+---
+
+## References

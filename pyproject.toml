@@ -1,0 +1,35 @@
+[project]
+name = "use-agentic-ai-in-science"
+version = "0.1.0"
+description = "Reference workspace and end-to-end bioinformatics example for conducting rigorous scientific research with agentic AI, Quarto, Google Drive, and NotebookLM."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "scipy>=1.13",
+    "statsmodels>=0.14",
+    "matplotlib>=3.9",
+    "seaborn>=0.13",
+    "pillow>=10.0",
+    "requests>=2.31",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+gdrive = [
+    "google-api-python-client>=2.140",
+    "google-auth-oauthlib>=1.2",
+    "google-auth-httplib2>=0.2",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

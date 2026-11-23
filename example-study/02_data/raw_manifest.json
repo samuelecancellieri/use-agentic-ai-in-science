@@ -1,0 +1,27 @@
+{
+  "generated_at_utc": "2026-11-23T14:53:50.036606+00:00",
+  "generator": "example-study/02_data/generate_dataset.py",
+  "seed": 42,
+  "files": [
+    {
+      "name": "dose_response.csv",
+      "bytes": 1639,
+      "sha256": "6034f05fe52cfa3e6df57b27d3f041392c27e397ffae0c8daab032c27fd35c61"
+    },
+    {
+      "name": "gene_pathways.csv",
+      "bytes": 26359,
+      "sha256": "6d639b2c4419f6fb2a8d8f5bb9e8a6c1462eaefa63fc22310ef2c7aa5f3aa05d"
+    },
+    {
+      "name": "rnaseq_counts.csv",
+      "bytes": 86624,
+      "sha256": "c6d6e4342017bdf89e14d48175551e32c1ef036612d04b987093b62c52d2f71a"
+    },
+    {
+      "name": "sample_metadata.csv",
+      "bytes": 428,
+      "sha256": "79d089e0aec3efe8000a9250fb02eea4d95687cb84e88324f0a2c65107b762c6"
+    }
+  ]
+}

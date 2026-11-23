@@ -1,0 +1,42 @@
+# Python environments & caches
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Environment & credentials (NEVER commit secrets)
+.env
+credentials.json
+token.json
+client_secret*.json
+
+# Large binary data (store in Google Drive / Zenodo / OSF instead of git)
+*.fastq
+*.fastq.gz
+*.bam
+*.bai
+*.h5ad
+*.rds
+*.RData
+
+# Quarto & Jupyter build artifacts
+.quarto/
+_site/
+*_files/
+*.ipynb_checkpoints/
+example-study/06_manuscript/*.html
+example-study/06_manuscript/*.pdf
+example-study/06_manuscript/*.docx
+
+# Unpublished raw/processed datasets & working results (stored in Google Drive, linked via SHA-256 manifests)
+example-study/02_data/raw/
+example-study/02_data/processed/
+
+# NotebookLM generated export packets (reproducible via tools/notebooklm_prep.py; synced to Google Drive)
+example-study/05_notebooklm/packet/
+
+# OS files
+.DS_Store
+Thumbs.db
