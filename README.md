@@ -43,13 +43,30 @@ To make this immediately teachable in a lab meeting, [`example-study/`](./exampl
 
 ## Quickstart (Reproduce Everything in < 30 Seconds)
 
-Requires Python ≥ 3.10 and [`uv`](https://docs.astral.sh/uv/) (or `pip`).
+Choose your preferred scientific environment manager (**`uv`**, **`conda`/`mamba`**, or **`pixi`**):
+
+- **Option A — `uv` (Recommended, fastest Python lockfile):**
+  ```bash
+  uv sync --extra dev
+  uv run pytest -v
+  ```
+- **Option B — `conda` / `mamba` (familiar in bioinformatics/HPC):**
+  ```bash
+  conda env create -f environment.yml   # or: mamba env create -f environment.yml
+  conda activate agentic-science
+  pytest -v
+  ```
+- **Option C — `pixi` (fast conda-forge + PyPI lockfile):**
+  ```bash
+  pixi install
+  pixi run reproduce
+  pixi run test
+  ```
+
+### Run the Full Pipeline (with `uv run`, `pixi run`, or inside `conda activate agentic-science`)
 
 ```bash
-# 1. Install scientific & helper dependencies
-uv sync --extra dev
-
-# 2. Generate deterministic benchmark dataset + SHA-256 manifest
+# 1. Generate deterministic benchmark dataset + SHA-256 manifest
 uv run python example-study/02_data/generate_dataset.py
 
 # 3. Run QC, PCA, differential expression (BH-FDR), pathway ORA, Hill IC50 & Bliss synergy
