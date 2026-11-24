@@ -41,6 +41,20 @@ To make this immediately teachable in a lab meeting, [`example-study/`](./exampl
 
 ---
 
+## Worked Example 2: Single-Cell RNA-seq Immune Remodeling ([`example-study-scrna/`](./example-study-scrna/))
+
+Applies the exact same 6-stage architecture to **single-cell RNA-seq** (*1,200 cells across 8 biological donors: 4 `Control`, 4 `AntiPD1`; 5 immune lineages*):
+
+- **Cell-Level QC & Atlas**: Filters `83` low-UMI / high-`%MT` outliers, retaining `1,117` cells (`93.1%`), validated via canonical marker dot plots (`CD3D`, `CD8A`, `GZMB`, `TOX`, `CD4`, `CD68`, `MS4A1`).
+- **H1 (Donor-Level Composition)**: `AntiPD1` expands `CD8+ Effector` T cells (`11.5% → 36.6%`, BH-FDR $= 0.0028$) and contracts `CD8+ Exhausted` T cells (`27.3% → 10.9%`, BH-FDR $= 0.0003$).
+- **H2 (Pseudobulk DE vs. Pseudoreplication)**: Donor-level pseudobulk detects cytotoxic activation (`GZMB`, `IFNG`) and exhaustion repression (`TOX`, `LAG3`) while keeping null background FPR at **`0.23%`** vs. **`21.82%`** under naive cell-level testing.
+
+| scRNA Figure 1: QC, Atlas, Dot Plot & Composition | scRNA Figure 2: Pseudobulk DE & Pseudoreplication Audit |
+| :---: | :---: |
+| ![scRNA Figure 1](example-study-scrna/04_figures/output/fig1_scrna_qc_and_atlas.png) | ![scRNA Figure 2](example-study-scrna/04_figures/output/fig2_pseudobulk_reprogramming.png) |
+
+---
+
 ## Quickstart (Reproduce Everything in < 30 Seconds)
 
 Choose your preferred scientific environment manager (**`uv`**, **`conda`/`mamba`**, or **`pixi`**):

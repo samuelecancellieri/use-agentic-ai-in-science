@@ -1,0 +1,69 @@
+---
+title: "Single-Cell Transcriptomic Profiling of Tumor-Infiltrating Immune Remodeling Under Anti-PD-1 Checkpoint Blockade"
+author:
+  - name: "Research Team (Agentic AI Single-Cell Worked Example)"
+    affiliation: "Open Science Reference Workspace"
+date: "2026-11-24"
+bibliography: references.bib
+---
+
+## Abstract
+
+**Background:** Immune checkpoint blockade targeting PD-1 remodels the tumor microenvironment, yet single-cell RNA-seq (scRNA-seq) differential expression analyses frequently suffer from pseudoreplication when individual cells are treated as independent biological replicates [@sadefeldman2018; @squair2021].  
+**Methods:** Using a pre-registered, reproducible scRNA-seq benchmark ($1,200$ cells across $8$ biological donors: $4$ `Control`, $4$ `AntiPD1`; $500$ profiled genes spanning five immune lineages and ten mitochondrial QC genes), we applied standard cell-level QC filtering [@luecken2019], CP10K + $\log_1p$ normalization, HVG-PCA embedding, donor-level compositional testing, and donor-level pseudobulk differential expression with Benjamini-Hochberg FDR control [@benjamini1995].  
+**Results:** Cell-level QC retained `1,117` of `1,200` cells (`93.1%`), removing `83` low-UMI or high-mitochondrial (`%MT >= 15%`) outliers. Across biological donors, `AntiPD1` significantly expanded `CD8_T_Effector` cells from `11.5%` to `36.6%` (`+25.1` percentage points; $p = 0.0011$, BH-FDR $= 0.0028$) and contracted `CD8_T_Exhausted` cells from `27.3%` to `10.9%` (`-16.4` percentage points; $p = 0.0001$, BH-FDR $= 0.0003$), while negative-control `B_Cell` abundance remained unchanged (`12.6%` vs. `12.0%`, $p = 0.790$), supporting **H1**. Donor-level pseudobulk DE in CD8+ T cells identified `10` upregulated effector genes (including `GZMB`, $\log_2\text{FC} = +2.11$, FDR $= 3.23 \times 10^{-3}$; `IFNG`, $\log_2\text{FC} = +2.11$, FDR $= 1.03 \times 10^{-3}$) and `10` downregulated exhaustion genes (including `TOX`, $\log_2\text{FC} = -2.91$, FDR $= 3.24 \times 10^{-5}$; `LAG3`, $\log_2\text{FC} = -3.19$, FDR $= 2.34 \times 10^{-4}$). On `440` null background genes, donor-level pseudobulk maintained a `0.23%` false-positive rate versus `21.82%` under naive cell-level testing, confirming **H2**.  
+**Conclusions:** Combining rigorous cell-level QC with donor-level compositional and pseudobulk inference accurately resolves anti-PD-1 immune reprogramming while preventing single-cell false discoveries.
+
+---
+
+## Introduction
+
+Single-cell RNA sequencing has revealed that clinical response to anti-PD-1 checkpoint immunotherapy depends on the balance between cytotoxic effector/memory CD8+ T cells and terminally exhausted T-cell states within the tumor microenvironment [@sadefeldman2018]. However, translating scRNA-seq datasets into trustworthy biological conclusions requires strict adherence to quality control best practices [@luecken2019; @wolf2018] and donor-aware statistical modeling. In particular, benchmark studies have demonstrated that cell-level differential expression tests ignore donor-level covariance and inflate false discovery rates—an issue resolved by donor-level pseudobulk aggregation [@squair2021].
+
+To demonstrate an end-to-end agentic AI workflow for single-cell transcriptomics, we pre-registered two hypotheses:
+
+- **H1 (Compositional Shift):** Anti-PD-1 treatment significantly expands donor-level `CD8_T_Effector` proportions and contracts `CD8_T_Exhausted` proportions while leaving negative-control `B_Cell` proportions unchanged.
+- **H2 (Pseudobulk Reprogramming & Calibration):** Donor-level pseudobulk DE within CD8+ T cells detects cytotoxic upregulation (`GZMB`, `IFNG`) and exhaustion downregulation (`TOX`, `LAG3`) while keeping null background false positives $\le 5\%$, in contrast to inflated naive cell-level testing.
+
+---
+
+## Methods
+
+### Benchmark Design & Quality Control
+
+The deterministic scRNA-seq benchmark (`seed = 101`, `02_data/generate_dataset.py`) profiles `1,200` cells across `8` biological donors (`4` `Control`, `4` `AntiPD1`; `150` cells/donor) and `500` genes (`10` mitochondrial `MT-*` genes, `50` canonical immune lineage/state markers, and `440` background null genes with realistic donor-level random effects). Following established scRNA-seq QC guidelines [@luecken2019], cells were retained if they had $\ge 500$ total UMIs, $\ge 200$ detected genes, and $< 15\%$ mitochondrial UMI fraction.
+
+### Normalization, Compositional Testing & Pseudobulk DE
+
+Passing cells were normalized to counts per 10,000 (CP10K) and $\log_1p$-transformed, followed by SVD/PCA embedding on the top `120` highly variable non-mitochondrial genes. Donor-level cell-type proportions were compared between `AntiPD1` and `Control` (`n = 4` donors/arm) via two-sided Welch's $t$-tests with Benjamini-Hochberg FDR adjustment [@benjamini1995]. For CD8+ T-cell differential expression, raw UMI counts were summed per donor (pseudobulk), normalized to $\log_2(\text{CPM} + 1)$, and tested across donors (`|log2FC| >= 1.0`, `BH-FDR < 0.05`). For pedagogical comparison, naive cell-level Welch's $t$-tests were run on the same CD8+ T cells to quantify pseudoreplication on the `440` null background genes [@squair2021].
+
+---
+
+## Results
+
+### Cell-Level QC, Lineage Annotation & Compositional Shift (H1)
+
+Of `1,200` input cells, `1,117` (`93.1%`) passed QC while `83` low-UMI or high-mitochondrial cells were removed (@fig-scrna-atlas A). HVG-PCA embedding (`PC1 = 10.7%`, `PC2 = 6.7%` variance explained) cleanly separated all five immune lineages (@fig-scrna-atlas B), validated by canonical marker expression (`CD3D`, `CD8A`, `GZMB`, `TOX`, `CD4`, `CD68`, `MS4A1`; @fig-scrna-atlas C). At the biological donor level (@fig-scrna-atlas D), `AntiPD1` significantly expanded `CD8_T_Effector` cells (`11.5%` to `36.6%`, `+25.1` percentage points; $p = 0.0011$, BH-FDR $= 0.0028$) and reduced `CD8_T_Exhausted` cells (`27.3%` to `10.9%`, `-16.4` percentage points; $p = 0.0001$, BH-FDR $= 0.0003$), whereas negative-control `B_Cell` proportions remained stable (`12.6%` vs. `12.0%`, $p = 0.790$), confirming **H1**.
+
+![Single-cell QC, immune atlas, marker validation, and donor-level compositional shift. (A) Total UMI counts versus mitochondrial read percentage showing QC thresholds and 83 filtered outlier cells. (B) 2D HVG-PCA embedding of 1,117 passing cells colored by immune lineage. (C) Canonical marker dot plot (dot size = percent expressing cells; color = scaled mean expression). (D) Donor-level cell-type proportions across Control and AntiPD1 arms (n = 4 donors per arm).](../04_figures/output/fig1_scrna_qc_and_atlas.png){#fig-scrna-atlas}
+
+### Pseudobulk Cytotoxic Reprogramming & Pseudoreplication Audit (H2)
+
+Donor-level pseudobulk DE within CD8+ T cells identified `10` upregulated and `10` downregulated genes (`|log2FC| >= 1.0`, `BH-FDR < 0.05`; @fig-scrna-pb A), featuring robust induction of cytotoxic effectors (`GZMB`: $\log_2\text{FC} = +2.11$, FDR $= 3.23 \times 10^{-3}$; `IFNG`: $\log_2\text{FC} = +2.11$, FDR $= 1.03 \times 10^{-3}$) and coordinated repression of exhaustion markers (`TOX`: $\log_2\text{FC} = -2.91$, FDR $= 3.24 \times 10^{-5}$; `LAG3`: $\log_2\text{FC} = -3.19$, FDR $= 2.34 \times 10^{-4}$). Crucially, auditing the `440` background null genes (@fig-scrna-pb B) revealed a well-calibrated `0.23%` false-positive rate under donor-level pseudobulk testing compared to `21.82%` under naive cell-level testing, directly illustrating the pseudoreplication hazard [@squair2021] and confirming **H2**.
+
+![Donor-level pseudobulk differential expression and pseudoreplication audit. (A) Pseudobulk volcano plot of AntiPD1 versus Control within CD8+ T cells (n = 4 donors per arm) highlighting upregulated cytotoxic effectors and downregulated exhaustion regulators. (B) False-positive rate across 440 null background genes at BH-FDR < 0.05 comparing donor-level pseudobulk (0.23%) against naive cell-level testing (21.82%).](../04_figures/output/fig2_pseudobulk_reprogramming.png){#fig-scrna-pb}
+
+---
+
+## Discussion
+
+This single-cell worked example illustrates how agentic AI workflows enforce statistical rigor in scRNA-seq—specifically cell-level QC transparency [@luecken2019] and donor-level pseudobulk inference to prevent pseudoreplication [@squair2021].
+
+### Limitations and Scaling to Real Wet-Lab Data
+
+1. **Synthetic Teaching Benchmark:** The dataset is deterministically generated to run in seconds without heavy dependencies. For full-scale wet-lab datasets ($10^4$–$10^6$ cells, $20,000+$ genes), replace the NumPy/SciPy preprocessing in `03_analysis/run_analysis.py` with `Scanpy` / `AnnData` [@wolf2018] (Leiden clustering, UMAP, Harmony/scVI batch integration) and `pydeseq2` / `edgeR` for pseudobulk GLMs.
+2. **Compositional Constraints:** Because cell-type proportions sum to 100%, large-scale cohorts should complement Welch's $t$-tests with compositional models (e.g., `scCODA` or centered log-ratio transforms).
+
+---
+
+## References

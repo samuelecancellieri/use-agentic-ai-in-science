@@ -100,3 +100,45 @@ def test_gdrive_manifest_builder(tmp_path: Path) -> None:
     )
     data = json.loads(out_manifest.read_text(encoding="utf-8"))
     assert data["file_count"] == 4
+
+
+def test_scrna_pipeline_and_pseudoreplication_audit() -> None:
+    scrna_dir = ROOT / "example-study-scrna"
+    run_py("example-study-scrna/02_data/generate_dataset.py")
+    run_py("example-study-scrna/03_analysis/run_analysis.py")
+
+    proc_dir = scrna_dir / "02_data" / "processed"
+    assert (proc_dir / "provenance.json").exists()
+    assert (scrna_dir / "03_analysis" / "analysis_summary.md").exists()
+
+    # Verify H1: donor-level CD8+ Effector expansion and Exhausted contraction
+    comp = pd.read_csv(proc_dir / "composition_stats.csv").set_index("cell_type")
+    assert float(comp.loc["CD8_T_Effector", "fdr"]) < 0.05
+    assert float(comp.loc["CD8_T_Effector", "diff_pp"]) > 10.0
+    assert float(comp.loc["CD8_T_Exhausted", "fdr"]) < 0.05
+    assert float(comp.loc["CD8_T_Exhausted", "diff_pp"]) < -10.0
+
+    # Verify H2: pseudobulk keeps null FPR <= 5% while naive cell-level inflates > 10%
+    pb = pd.read_csv(proc_dir / "pseudobulk_de_cd8.csv")
+    cell = pd.read_csv(proc_dir / "naive_cell_de_cd8.csv")
+    fpr_pb = float((pb[pb["module"] == "Background"]["fdr"] < 0.05).mean())
+    fpr_cell = float((cell[cell["module"] == "Background"]["fdr"] < 0.05).mean())
+    assert fpr_pb <= 0.05
+    assert fpr_cell > 0.10
+
+
+def test_scrna_figures_and_citations() -> None:
+    run_py("example-study-scrna/04_figures/make_figures.py")
+    qa = run_py("tools/figure_qa.py", "example-study-scrna/04_figures/output")
+    assert "Figure QA PASSED" in qa.stdout
+
+    cit = run_py(
+        "tools/verify_citations.py",
+        "--bib",
+        "example-study-scrna/06_manuscript/references.bib",
+        "--qmd",
+        "example-study-scrna/06_manuscript/manuscript.qmd",
+        "--offline",
+    )
+    assert "Citation audit PASSED" in cit.stdout
+

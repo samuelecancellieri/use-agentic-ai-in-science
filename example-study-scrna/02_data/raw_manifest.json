@@ -1,0 +1,22 @@
+{
+  "generated_at_utc": "2026-11-24T11:03:19.300501+00:00",
+  "generator": "example-study-scrna/02_data/generate_dataset.py",
+  "seed": 101,
+  "files": [
+    {
+      "name": "cell_metadata.csv",
+      "bytes": 51387,
+      "sha256": "c61c0a13bcb50203bd8919f6659b6cdd80a43de643df671a16499c409db916d3"
+    },
+    {
+      "name": "gene_annotations.csv",
+      "bytes": 9372,
+      "sha256": "9b9533d161be07e0cd30f874eec2b86ca1195c1948817f2c03e67961d14da2ac"
+    },
+    {
+      "name": "scrna_umi_counts.csv",
+      "bytes": 1231129,
+      "sha256": "9dba7882c3df72477deab587f6de82f2994d374e3eb22e33d1f353c8f85a759a"
+    }
+  ]
+}
