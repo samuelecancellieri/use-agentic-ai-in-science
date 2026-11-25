@@ -122,16 +122,19 @@ use-agentic-ai-in-science/
 ├── docs/
 │   ├── lab-meeting-demo.md           # 15-20 min presenter playbook & live prompts for lab meetings
 │   ├── workflow.md                   # 6-stage agentic research lifecycle
+│   ├── mnemosyne-memory.md           # Mnemosyne-inspired local-first SQLite scientific memory
 │   ├── google-drive-integration.md   # Keeping unpublished data, results & drafts in Google Drive
 │   ├── notebooklm-workflow.md        # Literature synthesis, claim auditing & Audio Overviews
-│   └── helper-tools-guide.md         # CLI reference for all 5 scientific helper tools
+│   └── helper-tools-guide.md         # CLI reference for all 6 scientific helper tools
 ├── tools/
 │   ├── lit_search.py                 # Live Europe PMC literature search -> JSON / Markdown / BibTeX
 │   ├── verify_citations.py           # CrossRef DOI & Quarto @citekey anti-hallucination auditor
 │   ├── notebooklm_prep.py            # Compile clean source packets & prompt banks for NotebookLM
 │   ├── gdrive_sync.py                # Google Drive sync (gdrive CLI / rclone) + SHA-256 manifests
-│   └── figure_qa.py                  # Automated DPI, dimension & vector-pair figure QA
-├── example-study/                    # Complete runnable bioinformatics worked example
+│   ├── figure_qa.py                  # Automated DPI, dimension & vector-pair figure QA
+│   └── memory_store.py               # Mnemosyne-inspired SQLite + FTS5 auditable scientific memory
+├── example-study/                    # Worked Example 1: Bulk RNA-seq + Drug Synergy
+├── example-study-scrna/              # Worked Example 2: Single-Cell RNA-seq + Pseudobulk DE
 └── tests/test_pipeline.py            # Automated pytest verification suite
 ```
 
@@ -140,6 +143,7 @@ use-agentic-ai-in-science/
 ## Guides & Presentations
 
 - **Presenting to your lab?** Start with [`docs/lab-meeting-demo.md`](./docs/lab-meeting-demo.md).
+- **Persistent cross-session memory?** See [`docs/mnemosyne-memory.md`](./docs/mnemosyne-memory.md).
 - **Setting up Google Drive for unpublished data & drafts?** See [`docs/google-drive-integration.md`](./docs/google-drive-integration.md).
 - **Integrating NotebookLM?** See [`docs/notebooklm-workflow.md`](./docs/notebooklm-workflow.md).
 - **Exploring the helper CLIs?** See [`docs/helper-tools-guide.md`](./docs/helper-tools-guide.md).

@@ -30,6 +30,7 @@ Before starting a specialized research stage, read the corresponding skill in `.
 | 3. Plots & Figure Design | `.agents/skills/figure-design/SKILL.md` | Designing publication-ready multi-panel figures (300 DPI PNG + vector SVG) |
 | 4. Manuscript Writing | `.agents/skills/manuscript-writing/SKILL.md` | Drafting Quarto (`.qmd`) IMRaD manuscripts, claim checking, simulated peer review |
 | 5. Research Ops | `.agents/skills/research-ops/SKILL.md` | Google Drive sync, NotebookLM source packet curation, citation auditing |
+| 6. Scientific Memory | `.agents/skills/scientific-memory/SKILL.md` | Mnemosyne-inspired local-first SQLite memory (evidence-backed recall, superseding, audit) |
 
 ---
 
@@ -42,6 +43,7 @@ Run all Python commands through `uv run python ...` (or the active virtual envir
 - `tools/notebooklm_prep.py` — Compile literature notes, hypothesis logs, analysis summaries, and manuscript drafts into clean NotebookLM source packets.
 - `tools/gdrive_sync.py` — Sync raw datasets, figures, and rendered manuscripts with Google Drive (`rclone`, `gdrive` CLI, or Google Drive API) with `--dry-run` safety.
 - `tools/figure_qa.py` — Verify figure resolution (≥300 DPI), dimensions, vector counterparts (`.svg`/`.pdf`), and non-empty rendering.
+- `tools/memory_store.py` — Mnemosyne-inspired local SQLite + FTS5 scientific memory store with trust tiers, evidence links, dependency-cascading superseding, and Markdown export.
 
 ---
 

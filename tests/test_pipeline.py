@@ -142,3 +142,51 @@ def test_scrna_figures_and_citations() -> None:
     )
     assert "Citation audit PASSED" in cit.stdout
 
+
+def test_mnemosyne_memory_lifecycle(tmp_path: Path) -> None:
+    db = tmp_path / "mnemosyne.db"
+    digest = tmp_path / "memory_digest.md"
+
+    run_py("tools/memory_store.py", "--db", str(db), "init")
+    run_py(
+        "tools/memory_store.py", "--db", str(db), "add",
+        "--tier", "semantic", "--trust", "verified_data",
+        "--evidence", "example-study-scrna/03_analysis/analysis_summary.md",
+        "--tags", "scrna,pseudobulk",
+        "--content", "Initial cohort (n=6 donors) pseudobulk FPR is 0.00%.",
+    )
+    run_py(
+        "tools/memory_store.py", "--db", str(db), "add",
+        "--tier", "procedural", "--trust", "pi_decision",
+        "--evidence", "Gate 2 Sign-off",
+        "--depends-on", "1",
+        "--tags", "scrna,sop",
+        "--content", "Report n=6 donor pseudobulk table in Methods.",
+    )
+
+    rec = run_py("tools/memory_store.py", "--db", str(db), "recall", "--query", "pseudobulk", "--json")
+    hits = json.loads(rec.stdout)
+    assert len(hits) == 2
+
+    # Supersede memory #1 with --cascade -> memory #2 should become needs_review
+    sup = run_py(
+        "tools/memory_store.py", "--db", str(db), "supersede",
+        "--id", "1",
+        "--new-content", "Expanded cohort (n=8 donors) pseudobulk FPR is 0.23%.",
+        "--evidence", "example-study-scrna/03_analysis/analysis_summary.md",
+        "--cascade",
+    )
+    assert "needs_review: [2]" in sup.stdout
+
+    audit = run_py("tools/memory_store.py", "--db", str(db), "audit")
+    report = json.loads(audit.stdout)
+    assert report["by_status"]["superseded"] == 1
+    assert report["by_status"]["needs_review"] == 1
+    assert report["missing_evidence_ids"] == []
+
+    run_py("tools/memory_store.py", "--db", str(db), "export-md", "--out", str(digest))
+    md = digest.read_text(encoding="utf-8")
+    assert "[NEEDS REVIEW]" in md
+    assert "Expanded cohort (n=8 donors)" in md
+
+

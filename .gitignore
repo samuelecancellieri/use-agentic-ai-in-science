@@ -43,6 +43,9 @@ example-study-scrna/06_manuscript/*.html
 example-study-scrna/06_manuscript/*.pdf
 example-study-scrna/06_manuscript/*.docx
 
+# Local Mnemosyne SQLite memory database (private lab sessions; export Markdown to Drive/NotebookLM if sharing)
+.memory/
+
 # OS files
 .DS_Store
 Thumbs.db
