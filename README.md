@@ -16,6 +16,7 @@ Most scientists start using AI by pasting text into a chat box—which quickly l
 4. **Clean Git vs. Google Drive Separation**:
    - **Published in Git**: Code, agent skills, Quarto manuscript source, verified BibTeX, documentation, and SHA-256 data manifests.
    - **Stored in Google Drive (Unpublished)**: Raw/processed datasets, primary literature PDFs, NotebookLM source packets, intermediate analysis results, and saved collaborator manuscript drafts.
+5. **Mnemosyne Scientific Memory ([`scientific-memory`](.agents/skills/scientific-memory/SKILL.md) + [`tools/memory_store.py`](tools/memory_store.py))**: Local-first SQLite + FTS5 memory across sessions with mandatory evidence pointers, trust tiers (`verified_data`, `peer_reviewed`, `pi_decision`, `exploratory`), and dependency-cascading `supersede` so agents never repeat stale conclusions.
 
 ```mermaid
 flowchart LR
@@ -100,8 +101,12 @@ uv run python tools/verify_citations.py \
   --bib example-study/06_manuscript/references.bib \
   --qmd example-study/06_manuscript/manuscript.qmd
 
-# 7. Run automated test suite
-uv run pytest
+# 7. (Optional) Initialize local Mnemosyne scientific memory & recall findings
+uv run python tools/memory_store.py init
+uv run python tools/memory_store.py recall --query "pseudobulk"
+
+# 8. Run automated test suite (covers both Bulk RNA-seq, scRNA-seq & Memory)
+uv run pytest -v
 ```
 
 To render the Quarto manuscript (requires [Quarto](https://quarto.org/)):
