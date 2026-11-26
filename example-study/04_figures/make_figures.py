@@ -301,27 +301,42 @@ def make_figure_2() -> None:
     exp = bliss_df["bliss_expected_inhibition"].values
     excess = bliss_df["bliss_excess"].values
 
+    ax_b.axhline(0.0, color="#777777", linestyle=":", linewidth=1.0, zorder=1, label="Bliss = 0 (Baseline)")
     ax_b.plot(x, obs, color=OKABE_ITO["Combo"], marker="D", linewidth=2.0, markersize=5.5, label="Observed Combo Inhibition")
     ax_b.plot(x, exp, color="#444444", linestyle="--", marker="o", linewidth=1.6, markersize=4.5, label="Bliss Expected (Additive)")
     ax_b.fill_between(x, exp, obs, where=(obs >= exp), color=OKABE_ITO["Teal"], alpha=0.22, label="Positive Bliss Synergy")
 
     peak_idx = int(np.argmax(excess))
+    mean_mid_bliss = float(bliss_df[bliss_df["concentration_uM"].between(0.1, 1.0)]["bliss_excess"].mean())
+
     ax_b.annotate(
         f"Peak Bliss excess\n+{excess[peak_idx]:.3f} @ {x[peak_idx]} µM",
         xy=(x[peak_idx], (obs[peak_idx] + exp[peak_idx]) / 2.0),
-        xytext=(1.1, 0.30),
+        xytext=(1.05, 0.36),
         fontsize=8,
         fontweight="bold",
         color="#005F45",
         arrowprops={"arrowstyle": "->", "color": "#005F45", "lw": 1.0},
     )
+    ax_b.text(
+        0.98,
+        0.10,
+        f"Mean mid-range Bliss (0.1–1.0 µM): {mean_mid_bliss:+.3f}",
+        transform=ax_b.transAxes,
+        ha="right",
+        va="bottom",
+        fontsize=7.8,
+        fontweight="bold",
+        color="#1E293B",
+        bbox={"boxstyle": "round,pad=0.35", "facecolor": "#F1F5F9", "edgecolor": "#94A3B8", "linewidth": 0.7},
+    )
 
     ax_b.set_xscale("log")
-    ax_b.set_ylim(0.0, 1.05)
+    ax_b.set_ylim(-0.06, 1.06)
     ax_b.set_xlabel("Drug Concentration (µM, log scale)")
     ax_b.set_ylabel("Fractional Growth Inhibition (1 - Viability)")
     ax_b.set_title("Bliss Independence Drug Synergy Profile", pad=8)
-    ax_b.legend(frameon=False, loc="upper left")
+    ax_b.legend(frameon=False, loc="upper left", fontsize=7.8)
     add_panel_label(ax_b, "B")
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)

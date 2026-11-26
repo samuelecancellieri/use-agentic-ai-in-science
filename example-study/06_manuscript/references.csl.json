@@ -1,0 +1,464 @@
+[
+  {
+    "id": "sos2009",
+    "type": "article-journal",
+    "title": "Identifying genotype-dependent efficacy of single and combined PI3K- and MAPK-pathway inhibition in cancer",
+    "container-title": "Proceedings of the National Academy of Sciences",
+    "volume": "106",
+    "issue": "43",
+    "page": "18351-18356",
+    "DOI": "10.1073/pnas.0907325106",
+    "issued": {
+      "date-parts": [
+        [
+          2009
+        ]
+      ]
+    },
+    "author": [
+      {
+        "family": "Sos",
+        "given": "Martin L."
+      },
+      {
+        "family": "Fischer",
+        "given": "Stefanie"
+      },
+      {
+        "family": "Ullrich",
+        "given": "Roland"
+      },
+      {
+        "family": "Peifer",
+        "given": "Martin"
+      },
+      {
+        "family": "Heuckmann",
+        "given": "Johannes M."
+      },
+      {
+        "family": "Koker",
+        "given": "Mirjam"
+      },
+      {
+        "family": "Heynck",
+        "given": "Stefanie"
+      },
+      {
+        "family": "St\u00fcckrath",
+        "given": "Isabel"
+      },
+      {
+        "family": "Weiss",
+        "given": "Jonathan"
+      },
+      {
+        "family": "Fischer",
+        "given": "Florian"
+      },
+      {
+        "family": "Michel",
+        "given": "Kathrin"
+      },
+      {
+        "family": "Goel",
+        "given": "Aviva"
+      },
+      {
+        "family": "Regales",
+        "given": "Lucia"
+      },
+      {
+        "family": "Politi",
+        "given": "Katerina A."
+      },
+      {
+        "family": "Perera",
+        "given": "Samanthi"
+      },
+      {
+        "family": "Getlik",
+        "given": "Matth\u00e4us"
+      },
+      {
+        "family": "Heukamp",
+        "given": "Lukas C."
+      },
+      {
+        "family": "Ans\u00e9n",
+        "given": "Sascha"
+      },
+      {
+        "family": "Zander",
+        "given": "Thomas"
+      },
+      {
+        "family": "Beroukhim",
+        "given": "Rameen"
+      },
+      {
+        "family": "Kashkar",
+        "given": "Hamid"
+      },
+      {
+        "family": "Shokat",
+        "given": "Kevan M."
+      },
+      {
+        "family": "Sellers",
+        "given": "William R."
+      },
+      {
+        "family": "Rauh",
+        "given": "Daniel"
+      },
+      {
+        "family": "Orr",
+        "given": "Christine"
+      },
+      {
+        "family": "Hoeflich",
+        "given": "Klaus P."
+      },
+      {
+        "family": "Friedman",
+        "given": "Lori"
+      },
+      {
+        "family": "Wong",
+        "given": "Kwok-Kin"
+      },
+      {
+        "family": "Pao",
+        "given": "William"
+      },
+      {
+        "family": "Thomas",
+        "given": "Roman K."
+      }
+    ]
+  },
+  {
+    "id": "villanueva2010",
+    "type": "article-journal",
+    "title": "Acquired Resistance to BRAF Inhibitors Mediated by a RAF Kinase Switch in Melanoma Can Be Overcome by Cotargeting MEK and IGF-1R/PI3K",
+    "container-title": "Cancer Cell",
+    "volume": "18",
+    "issue": "6",
+    "page": "683-695",
+    "DOI": "10.1016/j.ccr.2010.11.023",
+    "issued": {
+      "date-parts": [
+        [
+          2010
+        ]
+      ]
+    },
+    "author": [
+      {
+        "family": "Villanueva",
+        "given": "Jessie"
+      },
+      {
+        "family": "Vultur",
+        "given": "Adina"
+      },
+      {
+        "family": "Lee",
+        "given": "John T."
+      },
+      {
+        "family": "Somasundaram",
+        "given": "Rajasekharan"
+      },
+      {
+        "family": "Fukunaga-Kalabis",
+        "given": "Mizuho"
+      },
+      {
+        "family": "Cipolla",
+        "given": "Angela K."
+      },
+      {
+        "family": "Wubbenhorst",
+        "given": "Bradley"
+      },
+      {
+        "family": "Xu",
+        "given": "Xiaowei"
+      },
+      {
+        "family": "Gimotty",
+        "given": "Phyllis A."
+      },
+      {
+        "family": "Kee",
+        "given": "Damien"
+      },
+      {
+        "family": "Santiago-Walker",
+        "given": "Ademi E."
+      },
+      {
+        "family": "Letrero",
+        "given": "Richard"
+      },
+      {
+        "family": "D'Andrea",
+        "given": "Kurt"
+      },
+      {
+        "family": "Pushparajan",
+        "given": "Anitha"
+      },
+      {
+        "family": "Hayden",
+        "given": "James E."
+      },
+      {
+        "family": "Brown",
+        "given": "Kimberly Dahlman"
+      },
+      {
+        "family": "Laquerre",
+        "given": "Sylvie"
+      },
+      {
+        "family": "McArthur",
+        "given": "Grant A."
+      },
+      {
+        "family": "Sosman",
+        "given": "Jeffrey A."
+      },
+      {
+        "family": "Nathanson",
+        "given": "Katherine L."
+      },
+      {
+        "family": "Herlyn",
+        "given": "Meenhard"
+      }
+    ]
+  },
+  {
+    "id": "posch2013",
+    "type": "article-journal",
+    "title": "Combined targeting of MEK and PI3K/mTOR effector pathways is necessary to effectively inhibit NRAS mutant melanoma in vitro and in vivo",
+    "container-title": "Proceedings of the National Academy of Sciences",
+    "volume": "110",
+    "issue": "10",
+    "page": "4015-4020",
+    "DOI": "10.1073/pnas.1216013110",
+    "issued": {
+      "date-parts": [
+        [
+          2013
+        ]
+      ]
+    },
+    "author": [
+      {
+        "family": "Posch",
+        "given": "Christian"
+      },
+      {
+        "family": "Moslehi",
+        "given": "Homayoun"
+      },
+      {
+        "family": "Feeney",
+        "given": "Luzviminda"
+      },
+      {
+        "family": "Green",
+        "given": "Gary A."
+      },
+      {
+        "family": "Ebaee",
+        "given": "Anoosheh"
+      },
+      {
+        "family": "Feichtenschlager",
+        "given": "Valentin"
+      },
+      {
+        "family": "Chong",
+        "given": "Kim"
+      },
+      {
+        "family": "Peng",
+        "given": "Lily"
+      },
+      {
+        "family": "Dimon",
+        "given": "Michelle T."
+      },
+      {
+        "family": "Phillips",
+        "given": "Thomas"
+      },
+      {
+        "family": "Daud",
+        "given": "Adil I."
+      },
+      {
+        "family": "McCalmont",
+        "given": "Timothy H."
+      },
+      {
+        "family": "LeBoit",
+        "given": "Philip E."
+      },
+      {
+        "family": "Ortiz-Urda",
+        "given": "Susana"
+      }
+    ]
+  },
+  {
+    "id": "shi2014",
+    "type": "article-journal",
+    "title": "Acquired Resistance and Clonal Evolution in Melanoma during BRAF Inhibitor Therapy",
+    "container-title": "Cancer Discovery",
+    "volume": "4",
+    "issue": "1",
+    "page": "80-93",
+    "DOI": "10.1158/2159-8290.CD-13-0642",
+    "issued": {
+      "date-parts": [
+        [
+          2014
+        ]
+      ]
+    },
+    "author": [
+      {
+        "family": "Shi",
+        "given": "Hubing"
+      },
+      {
+        "family": "Hugo",
+        "given": "Willy"
+      },
+      {
+        "family": "Kong",
+        "given": "Xiangju"
+      },
+      {
+        "family": "Hong",
+        "given": "Aayoung"
+      },
+      {
+        "family": "Koya",
+        "given": "Richard C."
+      },
+      {
+        "family": "Moriceau",
+        "given": "Gatien"
+      },
+      {
+        "family": "Chodon",
+        "given": "Thinle"
+      },
+      {
+        "family": "Guo",
+        "given": "Rongqing"
+      },
+      {
+        "family": "Johnson",
+        "given": "Douglas B."
+      },
+      {
+        "family": "Dahlman",
+        "given": "Kimberly B."
+      },
+      {
+        "family": "Kelley",
+        "given": "Mark C."
+      },
+      {
+        "family": "Kefford",
+        "given": "Richard F."
+      },
+      {
+        "family": "Chmielowski",
+        "given": "Bartosz"
+      },
+      {
+        "family": "Glaspy",
+        "given": "John A."
+      },
+      {
+        "family": "Sosman",
+        "given": "Jeffrey A."
+      },
+      {
+        "family": "van Baren",
+        "given": "Nicolas"
+      },
+      {
+        "family": "Long",
+        "given": "Georgina V."
+      },
+      {
+        "family": "Ribas",
+        "given": "Antoni"
+      },
+      {
+        "family": "Lo",
+        "given": "Roger S."
+      }
+    ]
+  },
+  {
+    "id": "benjamini1995",
+    "type": "article-journal",
+    "title": "Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing",
+    "container-title": "Journal of the Royal Statistical Society Series B: Statistical Methodology",
+    "volume": "57",
+    "issue": "1",
+    "page": "289-300",
+    "DOI": "10.1111/j.2517-6161.1995.tb02031.x",
+    "issued": {
+      "date-parts": [
+        [
+          1995
+        ]
+      ]
+    },
+    "author": [
+      {
+        "family": "Benjamini",
+        "given": "Yoav"
+      },
+      {
+        "family": "Hochberg",
+        "given": "Yosef"
+      }
+    ]
+  },
+  {
+    "id": "bliss1939",
+    "type": "article-journal",
+    "title": "THE TOXICITY OF POISONS APPLIED JOINTLY1",
+    "container-title": "Annals of Applied Biology",
+    "volume": "26",
+    "issue": "3",
+    "page": "585-615",
+    "DOI": "10.1111/j.1744-7348.1939.tb06990.x",
+    "issued": {
+      "date-parts": [
+        [
+          1939
+        ]
+      ]
+    },
+    "author": [
+      {
+        "family": "BLISS",
+        "given": "C. I."
+      }
+    ]
+  }
+]
